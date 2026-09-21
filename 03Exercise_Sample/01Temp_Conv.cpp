@@ -13,7 +13,7 @@ float fahrenheit_to_celsius(float f);
 
 int main(){
     int user_option;
-    float temp_value = 0;
+    float temp_value = 0.0f;
 
     do{
         printf("\n===== Celsius <-> Fahrenheit Converter ======");
@@ -24,53 +24,57 @@ int main(){
         printf("\n2. Fahrenheit to Celsius");
         printf("\n3. Exit program\n");
         printf("\nYour selection:");
-        scanf("%d", &user_option);
 
-        if(user_option <1 || user_option > 3 ){
-        printf("\nInvalid option! Choose between 1-3.");
-        continue;
+        if(scanf("%d", &user_option) != 1){
+            printf("\n[ERROR] Invalid input! Please enter a number (1-3).\n");
+            while(getchar()!='\n');
+            continue;
         }
 
         switch(user_option){
             case 1:
             printf("\n======== Celcius -> Fahrenheit ==========");
             printf("\nEnter the celsius value: ");
-            scanf("%f", &temp_value);
+            /** Guard against bad float input**/
+            while(scanf("%f", &temp_value) != 1){
+                printf("Invalid temperature! Enter a valid number: ");
+                while(getchar() != '\n');
+            }
             printf("\n[%.2f Celsius is equal to %.2f Fahrenheit]\n", temp_value, celsius_to_fahrenheit(temp_value));
             break;
 
             case 2:
             printf("\n====== Fahrenheit -> Celcius =========");
             printf("\nEnter the Fahrenheit value: ");
-            scanf("%f", &temp_value);
+            /** Guard against bad float input**/
+            while(scanf("%f", &temp_value) != 1){
+                printf("Invalid temperature! Enter a valid number: ");
+                while(getchar() != '\n');
+            }
             printf("\n[%.2f Fahrenheit is equal to %.2f Celsius]\n", temp_value, fahrenheit_to_celsius(temp_value));
             break;
 
+            case 3:
+            printf("\n======Bye Bye!======\n");
+            break;
+
+            default:
+            printf("\n[ERROR] Invalid option! Choose between 1-3. \n");
+            break;
         }
 
-    }while(user_option != 3);
-
-    printf("\n======Bye Bye!======\n");
-
+    }while(user_option != 3); 
     return 0;
 }
 
 
 float celsius_to_fahrenheit(float c){
-    float fahrenheit = 0;
-
     /** Multiply 1.8 and then + 32 **/
-    fahrenheit = (c * 1.8) + 32;
-    
-    return fahrenheit;
+    return (c * 1.8) + 32;
 }
 
 
 float fahrenheit_to_celsius(float f){
-    float celsius = 0;
-
     /** subtract 32 , multiply 5, divide 9 **/
-    celsius = (f - 32) * 5 / 9;
-    
-    return celsius;
+    return (f - 32) * 5 / 9;
 }
