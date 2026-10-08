@@ -13,8 +13,8 @@ int main(void) {
     int numbers[5] = {10, 20, 30, 40, 50};
     int length = sizeof(numbers) / sizeof(numbers[0]);
 
-    printf("\n This is the sizeof(numbers[0])=%d", sizeof(numbers[0] ));
-    printf("\n This is the sizeof(numbers) value=%d", sizeof(numbers));
+    printf("\n This is the sizeof(numbers[3])=%d", sizeof(numbers[0] ));
+    printf("\n This is the sizeof(numbers)=%d", sizeof(numbers));
 
     print_size(numbers, length);
     return 0;

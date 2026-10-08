@@ -6,6 +6,9 @@ int main() {
     int *ptr_a = &a; // Pointer to a
     int *ptr_b = &b; // Pointer to b
 
+    printf("size of *ptr_a = %d\n", sizeof(*ptr_a));
+    printf("size of ptr_a = %d\n", sizeof(ptr_a));
+
     printf("Before swapping:\n");
     printf("a = %d, b = %d\n", a, b);
 
