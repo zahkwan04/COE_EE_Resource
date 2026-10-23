@@ -17,16 +17,7 @@
 //
 // We'll drive the built-in LED (PB5) and an external LED on PD4.
 
-#ifndef CI_BUILD
 #include <avr/io.h>
-#endif
-
-#ifdef CI_BUILD
-// Mocking avr/io.h for CI build validation
-typedef unsigned char uint8_t;
-#define DDRB 0x04
-#define PORTB 0x05
-#endif
 #include <util/delay.h>
 
 // ------------------------------------------------------------
