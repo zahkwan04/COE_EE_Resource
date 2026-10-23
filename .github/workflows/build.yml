@@ -32,6 +32,10 @@ jobs:
           # Find all .c files in Core_Concepts and compile them individually to verify correctness
           for file in 05Deep_Dive_C/Core_Concepts/*.c; do
             echo "Compiling $file..."
+<<<<<<< HEAD
             gcc -DCI_BUILD -Wall -Wextra "$file" -o temp_test || exit 1
+=======
+            gcc -Wall -Wextra "$file" -o temp_test || exit 1
+>>>>>>> b0f0698a7039d3eb7d1c96a0a39d6ebc90ad9522
             rm temp_test
           done

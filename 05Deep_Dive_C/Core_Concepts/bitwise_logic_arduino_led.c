@@ -19,15 +19,21 @@
 
 #ifndef CI_BUILD
 #include <avr/io.h>
+#include <util/delay.h>
 #endif
 
 #ifdef CI_BUILD
-// Mocking avr/io.h for CI build validation
+// Mocking AVR headers and registers for CI build validation
 typedef unsigned char uint8_t;
-#define DDRB 0x04
-#define PORTB 0x05
+#define DDRB  (*(volatile uint8_t *)0x04)
+#define PORTB (*(volatile uint8_t *)0x05)
+#define PINB  (*(volatile uint8_t *)0x06)
+#define DDRD  (*(volatile uint8_t *)0x0B)
+#define PORTD (*(volatile uint8_t *)0x0C)
+#define PIND  (*(volatile uint8_t *)0x0D)
+
+static inline void _delay_ms(double ms) { (void)ms; }
 #endif
-#include <util/delay.h>
 
 // ------------------------------------------------------------
 // Bit position definitions (like a mini datasheet)
