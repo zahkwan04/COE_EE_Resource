@@ -33,6 +33,13 @@ typedef unsigned char uint8_t;
 #define PIND  (*(volatile uint8_t *)0x0D)
 
 static inline void _delay_ms(double ms) { (void)ms; }
+
+// Dummy main for CI to prevent linker errors
+int main(void) {
+    setup();
+    loop();
+    return 0;
+}
 #endif
 
 // ------------------------------------------------------------
