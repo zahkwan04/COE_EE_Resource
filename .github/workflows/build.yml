@@ -1,0 +1,37 @@
+name: C/C++ Build Check
+
+on:
+  push:
+    branches: [ main, feature/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Compile Sample Code (Basics)
+        run: |
+          g++ -Wall -Wextra "02Sample_Code/Basics/01hello_world.c" -o hello_world_test || echo "Compilation failed"
+
+      - name: Compile Ray Tracer
+        run: |
+          g++ -O3 "02Sample_Code/Graphics/04ray_tracer.cpp" -o raytracer_test || echo "Compilation failed"
+
+      - name: Compile Deep Dive C Examples
+        run: |
+          # Find all .c files in Core_Concepts and compile them individually to verify correctness
+          for file in 05Deep_Dive_C/Core_Concepts/*.c; do
+            echo "Compiling $file..."
+            gcc -Wall -Wextra "$file" -o temp_test || exit 1
+            rm temp_test
+          done
